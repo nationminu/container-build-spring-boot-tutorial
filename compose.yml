@@ -1,0 +1,33 @@
+---
+version: '3.9'
+
+services:
+  # Docker build
+  build:
+    build: .
+    image: local/demo:latest
+    profiles: ["build"]
+
+  # Demo Container
+  demo:
+    image: local/demo:latest
+    profiles: ["demo"]
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: "Asia/Seoul"
+      RUNTIME_PROFILE: docker
+
+  # Database Container
+  db:
+    image: mysql:latest
+    profiles: ["", "demo", "db"]
+    ports:
+      - "3306:3306"
+    command: --lower_case_table_names=1
+    environment:
+      TZ: "Asia/Seoul"
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: demo
+      MYSQL_USER: demo
+      MYSQL_PASSWORD: demo
