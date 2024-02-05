@@ -1,7 +1,7 @@
 # Getting Started
 
 ## Dockerfile build
-> application-local.properties
+> Dockerfile
 ```
 ## 컨테이너 이미지 생성 Dockerfile
 
